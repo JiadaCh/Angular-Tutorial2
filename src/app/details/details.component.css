@@ -63,9 +63,15 @@ input {
   border-left: none;
   border-bottom: solid .3px;
 }
+
+
 @media (max-width: 1024px) {
   .listing-photo {
     width: 100%;
     height: 400px;
   }
+}
+.ng-invalid {
+  border-color: red;
+  border-bottom-width: 2px;
 }
