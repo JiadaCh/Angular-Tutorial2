@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
-import {HousingLocation} from "./housinglocation";
+import {Weather} from "./weather";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +10,7 @@ export class WeatherService {
   constructor() {
   }
 
-  async getWeather(location:string){
+  async getWeather(location:string):Promise<Weather|undefined>{
     const data = await fetch(`${this.baseURL+this.key}&q=${location}`);
     return await data.json() ?? {};
   }

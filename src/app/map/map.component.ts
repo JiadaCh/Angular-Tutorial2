@@ -4,8 +4,9 @@ import {Map, marker, tileLayer} from "leaflet";
 import {ActivatedRoute} from "@angular/router";
 import {HousingService} from "../housing.service";
 import {HousingLocation} from "../housinglocation";
-import {WeatherService} from "../weather.service";
+import { WeatherService} from "../weather.service";
 import {NgIf} from "@angular/common";
+import {Weather} from "../weather";
 
 @Component({
   selector: 'app-map',
@@ -22,7 +23,7 @@ export class MapComponent implements OnInit {
   housingService = inject(HousingService);
   housingLocation: HousingLocation | undefined;
   weatherService = inject(WeatherService);
-  weather:any;
+  weather: Weather | undefined;
   geo: any = [0, 0];
   map: any;
   location: string = "";
@@ -36,14 +37,14 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
 
-    setTimeout(() => {
+    setTimeout( () => {
       if (this.housingLocation) {
 
         this.geo = this.geo = this.placeService.getHouseLocation(this.housingLocation);
         this.location = this.housingLocation?.city + ", " + this.housingLocation?.state;
         this.setGeoLocation()
-        this.weather = this.weatherService.getWeather(this.housingLocation.city)
-        console.log(this.weather)
+
+        this.getWeather(this.geo + "").catch(reason => console.log(reason))
       }
     }, 1000)
   }
@@ -53,6 +54,8 @@ export class MapComponent implements OnInit {
       this.map.remove();
       this.geo = this.geo = this.placeService.getHouseLocation(this.housingLocation);
       this.location = this.housingLocation?.city + ", " + this.housingLocation?.state;
+
+      this.getWeather(this.geo + "").catch(reason => console.log(reason))
       this.setGeoLocation()
 
     }
@@ -62,9 +65,12 @@ export class MapComponent implements OnInit {
     this.map.remove();
     this.geo = this.placeService.userLocalitation;
     this.location = "Mi Ubicación"
+    this.getWeather(this.geo + "").catch(reason => console.log(reason))
     this.setGeoLocation()
   }
-
+  async getWeather(location:string) {
+    this.weather = await this.weatherService.getWeather(location)
+  }
   setGeoLocation(): void {
 
 

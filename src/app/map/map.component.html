@@ -1,5 +1,5 @@
 <h2 class="heading">Mapa</h2>
-<div>
+<div class="flex-row">
   <div class="map-container">
     <div class="botones">
       <button (click)="houseLocation()">Localización del casa</button>
@@ -11,7 +11,18 @@
     </div>
   </div>
   <div *ngIf="weather">
+    <h2 class="heading">Weather in {{weather.location.name}}</h2>
+    <h3 class="heading">Condition</h3>
+    <div class="flex-column">
 
+      <img width="150px" src="{{weather.current.condition.icon}}" alt="{{weather.current.condition.text}}">
+      <h4 >{{weather.current.condition.text}}</h4>
+    </div>
+    <h3 class="heading">Temperature</h3>
+    <div class="flex-column">
+
+      <h4 >{{weather.current.temp_c}}ºC</h4>
+    </div>
   </div>
 </div>
 
