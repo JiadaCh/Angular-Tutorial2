@@ -9,7 +9,6 @@ export interface HousingLocation {
   laundry: boolean;
   latitude: number;
   longitude: number;
-  score:number;
 }
 
 

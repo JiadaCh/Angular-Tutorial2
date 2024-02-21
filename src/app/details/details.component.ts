@@ -16,7 +16,8 @@ export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   housingService = inject(HousingService);
   housingLocation: HousingLocation | undefined;
-
+  evaluation:number = 5;
+  send:number = 5;
   applyForm = new FormGroup({
     firstName: new FormControl('',Validators.required),
     lastName: new FormControl('',Validators.required),
@@ -31,19 +32,19 @@ export class DetailsComponent {
   }
   evaluationEqual(){
     if (this.housingLocation)
-      return this.housingLocation.score== 3;
+      return this.evaluation== 3;
     else
       return false;
   }
   evaluationUp(){
     if (this.housingLocation)
-      return this.housingLocation.score >= 4;
+      return this.evaluation >= 4;
     else
       return false;
   }
   evaluationDown(){
     if (this.housingLocation)
-      return this.housingLocation.score <= 2;
+      return this.evaluation <= 2;
     else
       return false;
   }
@@ -55,6 +56,13 @@ export class DetailsComponent {
     );
     this.applyForm.reset();
     window.alert('Form submitted');
+
+  }
+  submitEvaluation() {
+
+    this.evaluation = this.send;
+    alert("Send")
+
 
   }
 }

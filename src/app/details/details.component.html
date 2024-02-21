@@ -11,10 +11,12 @@
       <li>Units available: {{housingLocation?.availableUnits}}</li>
       <li>Does this location have wifi: {{housingLocation?.wifi}}</li>
       <li>Does this location have laundry: {{housingLocation?.laundry}}</li>
-      <li>Sastisfaction: {{housingLocation?.score}}
+      <li>Sastisfaction: {{evaluation}}
         <span *ngIf="evaluationUp()"><img  ngSrc="assets/up.svg" height="16" width="16" alt="up"/></span>
         <span *ngIf="evaluationDown()"><img  ngSrc="assets/down.svg" height="16" width="16" alt="down"/></span>
         <span *ngIf="evaluationEqual()"><img  ngSrc="assets/-.svg" height="16" width="16" alt="-"/></span>
+        <input type="number" [(ngModel)]="send" [min]="0" [max]="5">
+        <button (click)="submitEvaluation()">Send</button>
       </li>
     </ul>
   </section>
